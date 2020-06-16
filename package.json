@@ -1,6 +1,6 @@
 {
 	"name": "run-concurrent-batches",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "run (async) functions in batches, always running the same amount of load",
 	"license": "MIT",
 	"repository": "lucamattiazzi/run-concurrent-batches",

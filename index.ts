@@ -12,8 +12,8 @@ export async function runConcurrentBatch<T = any>(
   const currentlyRunning: Record<number, WrappedPromise<T>> = {}
   const results: ResultDict<T> = {}
   const errors: ErrorDict = {}
-  while (functionsToRun.length) {
-    while (Object.values(currentlyRunning).length < batchSize) {
+  while (functionsToRun.length || Object.values(currentlyRunning).length) {
+    while (Object.values(currentlyRunning).length < batchSize && functionsToRun.length) {
       const instanceIdx = functions.length - functionsToRun.length
       const instance = functionsToRun.shift()
       const promisifiedInstance: WrappedPromise<T> = new Promise(async (resolve) => {
