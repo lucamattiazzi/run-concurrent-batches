@@ -77,12 +77,13 @@ export function keepRunningConcurrentBatch<T = any>(
       try {
         const result = await fn(idx)
         results[idx] = result
+        resolve([idx, results[idx], null])
       } catch (err) {
         errors[idx] = err
+        resolve([idx, null, err])
       } finally {
         delete currentlyRunning[idx]
         if (active) addToBatch(instanceIdx)
-        resolve()
       }
     })
     currentlyRunning[instanceIdx] = promisifiedInstance
